@@ -1,0 +1,28 @@
+<html>
+<head>
+</head>	
+<body>
+
+<div id="all" ng-controller="AppCtrl" ng-cloak="" ng-app="MyApp" layout="column" flex>
+  <div style="background:red; height:100px"></div>
+  <div layout="row" flex="90">
+    <div style="background:blue" flex="10">side</div>
+    <div layout="column" flex="80">
+      <div >
+        contet test
+      </div>
+      <div style="background:yellow; height:100px"></div>
+    </div>
+    <div style="background:blue" flex="10"></div>
+  </div>
+</div>
+
+
+<script>
+angular.module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngDialog'])
+
+.controller('AppCtrl', function() {
+});
+</script>
+</body>
+</html>
