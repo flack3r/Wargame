@@ -19,6 +19,7 @@ from MainApp.views import index
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', index, name='index'),
-    url(r'^blog/', include('blog.urls')), 
+    url(r'^\Z', include('MainApp.urls')),
+    url(r'^blog/', include('blog.urls')),
+    url(r'^PwnCtf/*', include('MainApp.urls')),
 ]

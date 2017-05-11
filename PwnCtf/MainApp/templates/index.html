@@ -1,28 +1,70 @@
-<html>
-<head>
-</head>	
-<body>
+{% extends 'layout.html' %}
 
-<div id="all" ng-controller="AppCtrl" ng-cloak="" ng-app="MyApp" layout="column" flex>
-  <div style="background:red; height:100px"></div>
-  <div layout="row" flex="90">
-    <div style="background:blue" flex="10">side</div>
-    <div layout="column" flex="80">
-      <div >
-        contet test
-      </div>
-      <div style="background:yellow; height:100px"></div>
+{% block content %}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Welcome to PwnCTF
+                </h1>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        <i class="fa fa-dashboard"></i> Main
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i>Notice</h3>
+                </div>
+                <div class="panel-body">
+                    <h1>1. About</h1>
+                        <ul>
+                            <li>PwnCtf는 처음 CTF에 입문하는 사람들을 위한 사이트 입니다.</li>
+                        </ul>
+                    <h1>2. HowTo</h1>
+                        <ul>
+                            <li>각 문제에 존재하는 취약점을 찾아 익스플로잇하고 flag를 찾으면 됩니다.</li>
+                            <li>flag는 각 문제 홈 디렉토리에 존재합니다.</li>
+                            <li>힌트가 궁금하면 주인장을 찾으세요</li>
+                        </ul>
+                    <h1>3. Rules</h1>
+                        <ul>
+                            <li>Dos공격 금지</li>
+                            <li>flag 공유 금지.</li>
+                            <li>문제의 취약점이 아닌 시스템이나 사이트의 취약점을 찾아 보고하시면 좋아해드림 >_<</li>
+                        </ul>
+                    <h1>4. Contact</h1>
+                    <ul>
+                        <li>kyj9206@gmail.com</li>
+                        <li><a href="http://flack3r.tistory.com">주인장 블로그</a></li>
+                        <li>직접 찾아와도 됨</li>
+                        <li>made by flack3r</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i>Update</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        {% for msg in Notice %}
+                        <a href="#" class="list-group-item">
+                            <span class="badge">{{msg.created_data | date:"F d"}}</span>
+                            <i class="fa fa-fw fa-calendar"></i> {{ msg }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div style="background:blue" flex="10"></div>
-  </div>
+            <!-- /.container-fluid -->
 </div>
-
-
-<script>
-angular.module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngDialog'])
-
-.controller('AppCtrl', function() {
-});
-</script>
-</body>
-</html>
+{% endblock content %}

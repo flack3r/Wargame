@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container-fluid">
+                <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Reversing
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> problems
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        {% for prob in Problem %}
+        <div class="col-lg-3 col-md-6">
+            {% if prob.title in solvedList %}
+            <div class="panel panel-green">
+            {% else %}
+            <div class="panel panel-primary">
+            {% endif %}
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-9 text-middle">
+                            <div class="huge">{{prob}}</div>
+                            <div>{{prob.score}} point</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <a href="#" data-toggle="modal" data-target="#{{prob}}" class="pull-left">View Details</a>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="modal fade" id="{{prob}}" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 style="color:blue;">{{prob}} [{{prob.score}} points]</h4>
+                    </div>
+                    <div class="modal-body">
+                       {{prob.text | linebreaks}}
+                       <br>
+                       <br>
+                       <p>first blood: <a href="#">{{prob.Firstblood}}</a><br>
+                       solved {{prob.solverNum}} times </p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="input-group" id="submit-form">
+                            {% csrf_token %}
+                            <input type="text" class="form-control" id="flag_input" placeholder="PwnCtf{.....}">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary flag_submit_button" type="button" data-challenge={{prob}}>Submit</button>
+                            </span>
+                        </div>
+                        <span id="submit-status" hidden></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+<script>
+    $(".flag_submit_button").click(function()
+    {
+        var Name = $(this).attr("data-challenge")
+        var csrf_token = $("#submit-form input[name='csrfmiddlewaretoken'").val()
+        var form_data = {
+            challengeName: Name,
+            flag: $("#"+Name+" #flag_input").val(),
+            csrfmiddlewaretoken: csrf_token,
+            next: "/"
+        };
+        
+        $.ajax({
+            type: "POST",
+            url:"/PwnCtf/flagCheck/",
+            data: form_data,
+            success: function(response) {
+                if(response == 'Correct'){
+                    alert("맞았습니다!");
+                    location.reload();
+                }
+                else if(response == 'Fail')
+                {
+                    alert("틀렸습니다!");
+                }
+                else{
+                    alert("You already solved");
+                }
+            }
+        })
+        return false;
+    })
+</script>
+{% endblock content %}

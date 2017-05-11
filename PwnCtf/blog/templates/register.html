@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+    <body class="container">
+        <!-- Sign Up Form -->
+        <form id="signup" class="form-horizontal" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+
+            <!-- Username input-->
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    {{ signupform.username.label_tag }}
+                    {{ signupform.username }}
+                    <span class="field-error">
+                    {{ signupform.username.errors|striptags }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Email input-->
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    {{ signupform.email.label_tag }}
+                    {{ signupform.email }}
+                    <span class="field-error">
+                    {{ signupform.email.errors|striptags }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password1 input-->
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    {{ signupform.password1.label_tag }}
+                    {{ signupform.password1 }}
+                    <span class="field-error">
+                    {{ signupform.password1.errors|striptags }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password2 input-->
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    {{ signupform.password2.label_tag }}
+                    {{ signupform.password2 }}
+                    <span class="field-error">
+                    {{ signupform.password2.errors|striptags }}
+                    </span>
+                </div>
+            </div>
+
+            <br>
+
+            <!-- Button -->
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <button id="signup" name="signup" class="btn btn-block btn-default" type="submit">Sign Up</button>
+                    <hr>
+                    <center>
+                    Or <a href="#"><u>log in</u></a>
+                    if you have an account.
+                    </center>
+                </div>
+            </div>
+
+        </form>
+
+    </body>
+</html>
